@@ -1,14 +1,22 @@
-image: helterpitanga/terraformansible:latest
+image: 
+  name: helterpitanga/terraformansible:latest
+  entrypoint:
+      - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+      - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+cache:
+  paths:
+    - .terraform
+
+before_script:
+  - terraform --version
+  - terraform init
 stages:
   - init
   - plan
   - apply
 
 terraform_init:
-  stage: init
-  before_script:
-      - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-      - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+  stage: init    
   script:
     - terraform init
   after_script:
@@ -18,11 +26,8 @@ terraform_plan:
   stage: plan
   needs: 
     - terraform_init
-  before_script:
-      - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-      - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
   script:
-      - terraform plan -out plan.tfplan
+      - terraform plan 
   after_script:
       - echo "plano rodado com sucesso"
 
@@ -30,10 +35,7 @@ terraform_apply:
   stage: apply
   needs: 
     - terraform_plan
-  before_script:
-      - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-      - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
   script:
-      - terraform apply plan.tfplan
+      - terraform apply -auto-approve
   after_script:
       - echo "Apply rodado com sucesso"
