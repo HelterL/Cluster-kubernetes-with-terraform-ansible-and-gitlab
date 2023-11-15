@@ -1,0 +1,45 @@
+stages:
+  - init
+  - plan
+  - apply
+
+terraform_init:
+  stage: init
+  image: helterpitanga/terraformansible:latest
+  before_script:
+      - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+      - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+  script:
+    - terraform init
+  after_script:
+    - echo "Inicializado com sucesso"
+  artifacts:
+    when: always
+    reports:
+        junit: app/junit.xml
+
+terraform_plan:
+  image: helterpitanga/terraformansible:latest
+  stage: plan
+  needs: 
+    - terraform_init
+  before_script:
+      - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+      - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+  script:
+      - terraform plan -out plan.tfplan
+  after_script:
+      - echo "plano rodado com sucesso"
+
+terraform_apply:
+  image: helterpitanga/terraformansible:latest
+  stage: apply
+  needs: 
+    - terraform_plan
+  before_script:
+      - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+      - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+  script:
+      - terraform apply plan.tfplan
+  after_script:
+      - echo "Apply rodado com sucesso""
