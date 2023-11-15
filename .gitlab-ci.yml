@@ -1,3 +1,4 @@
+image: helterpitanga/terraformansible:latest
 stages:
   - init
   - plan
@@ -5,7 +6,6 @@ stages:
 
 terraform_init:
   stage: init
-  image: helterpitanga/terraformansible:latest
   before_script:
       - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
       - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
@@ -13,13 +13,8 @@ terraform_init:
     - terraform init
   after_script:
     - echo "Inicializado com sucesso"
-  artifacts:
-    when: always
-    reports:
-        junit: app/junit.xml
 
 terraform_plan:
-  image: helterpitanga/terraformansible:latest
   stage: plan
   needs: 
     - terraform_init
@@ -32,7 +27,6 @@ terraform_plan:
       - echo "plano rodado com sucesso"
 
 terraform_apply:
-  image: helterpitanga/terraformansible:latest
   stage: apply
   needs: 
     - terraform_plan
@@ -42,4 +36,4 @@ terraform_apply:
   script:
       - terraform apply plan.tfplan
   after_script:
-      - echo "Apply rodado com sucesso""
+      - echo "Apply rodado com sucesso"
