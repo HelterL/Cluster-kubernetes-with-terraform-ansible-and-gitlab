@@ -1,8 +1,5 @@
 ---
 - name: Installing and Configuring Kubernetes Cluster For Master Nodes
-  hosts: tag_Type_Master
-  become: yes
-  gather_facts: true
 
   tasks:
     - name: Prerequstites of Kubernetes Cluster for Ubuntu

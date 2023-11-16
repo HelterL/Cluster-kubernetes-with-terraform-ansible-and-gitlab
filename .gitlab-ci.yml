@@ -13,6 +13,7 @@ cache:
 before_script:
   - terraform --version
   - terraform init
+
 stages:
   - init
   - plan
