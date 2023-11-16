@@ -1,5 +1,8 @@
 ---
 - name: Installing and Configuring Kubernetes Cluster For Worker Nodes
+  hosts: tag_Type_Workers
+  become: yes
+  gather_facts: true
 
   tasks:
     - name: Prerequstites of Kubernetes Cluster for Ubuntu
@@ -129,7 +132,7 @@
         sudo sh /home/ubuntu/joincluster.sh
       tags: "14"
 
-- hosts: k8snodes
+- hosts: tag_Type_Workers
 
   tasks:
     - debug:

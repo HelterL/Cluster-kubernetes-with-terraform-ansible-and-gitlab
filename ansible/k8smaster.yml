@@ -1,5 +1,8 @@
 ---
 - name: Installing and Configuring Kubernetes Cluster For Master Nodes
+  hosts: tag_Type_Master
+  become: yes
+  gather_facts: true
 
   tasks:
     - name: Prerequstites of Kubernetes Cluster for Ubuntu
@@ -116,7 +119,7 @@
         kubeadm token create --print-join-command > /etc/kubernetes/joincluster.sh 2>/dev/null
       tags: "14"
 
-- hosts: k8smaster
+- hosts: tag_Type_Master
   tasks:
     - name: Fetch API Token From K8S Master To Ansible Controller
       fetch:
@@ -125,7 +128,7 @@
         flat: yes
       tags: "15"
 
-- hosts: k8snodes
+- hosts: tag_Type_Workers
   tasks:
     - name: Copy API Token From Ansible Controller To K8S Worker Nodes
       copy:

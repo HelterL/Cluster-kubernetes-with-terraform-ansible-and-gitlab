@@ -18,6 +18,9 @@ stages:
   - init
   - plan
   - apply
+  - time
+  - master
+  - workers
 
 terraform_init:
   stage: init    
@@ -43,3 +46,23 @@ terraform_apply:
       - terraform apply -auto-approve
   after_script:
       - echo "Apply rodado com sucesso"
+
+time_for_running_stage_instances:
+  stage: time
+  needs: 
+    - terraform_apply
+  script:
+      - sleep 4m
+
+ansible_master:
+  stage: master
+  needs:
+    - time_for_running_stage_instances
+  script:
+    - cd ansible/
+    - echo "$PRIVATE_KEY" > aws-server.pem
+    - unset PRIVATE_KEY
+    - chmod 600 aws-server.pem
+    - ansible-playbook -i aws_ec2.yaml --ssh-common-args='-o StrictHostKeyChecking=no' k8smaster.yml 
+
+  
