@@ -3,7 +3,7 @@ resource "aws_instance" "k8s-workers" {
   instance_type = "t3.medium"
   key_name = "aws-server"
   count = 2
-  subnet_id = var.private_subnet_1a
+  subnet_id = var.public_subnet_1a
   vpc_security_group_ids = [ var.security_group_id ]
   tags = {
     "Name" : "K8S"

@@ -10,4 +10,4 @@ keyed_groups:
     prefix: tag_Type
 
 hostnames:
-  - private-ip-address
+  - ip-address
