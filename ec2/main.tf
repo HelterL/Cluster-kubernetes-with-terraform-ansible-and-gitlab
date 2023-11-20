@@ -4,6 +4,7 @@ resource "aws_instance" "k8s-workers" {
   key_name = "aws-server"
   count = 2
   subnet_id = var.public_subnet_1a
+  associate_public_ip_address = true
   vpc_security_group_ids = [ var.security_group_id ]
   tags = {
     "Name" : "K8S"
