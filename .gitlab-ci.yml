@@ -62,7 +62,7 @@ ansible_master:
     - mkdir -p ~/.ssh/
     - echo "$PRIVATE_KEY" > ~/.ssh/id_rsa
     - unset PRIVATE_KEY
-    - echo "teste"
+    - echo "testando"
     - chmod 600 ~/.ssh/id_rsa
     - ansible-playbook -i ansible/aws_ec2.yaml  --ssh-common-args='-o StrictHostKeyChecking=no' --private-key ~/.ssh/id_rsa ansible/k8smaster.yml
 
