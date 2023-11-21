@@ -4,7 +4,7 @@
 
 * Docker
 * Ansible
-* Terraforma
+* Terraform
 * Gitlab CI
 * AWS
 * Kubernetes
