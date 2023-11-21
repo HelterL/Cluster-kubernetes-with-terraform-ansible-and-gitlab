@@ -2,12 +2,12 @@
 
 ## O que utilizei?
 
-Docker
-Ansible
-Terraforma
-Drone CI
-AWS
-Kubernetes
+* Docker
+* Ansible
+* Terraforma
+* Gitlab CI
+* AWS
+* Kubernetes
 
 ## Pré-requisitos 
 
