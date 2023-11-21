@@ -8,4 +8,4 @@ RUN apt update && \
     apt install python3-pip -y && \
     pip install boto3 botocore &&\
     wget https://releases.hashicorp.com/terraform/1.6.4/terraform_1.6.4_linux_amd64.zip && \
-    unzip terraform_1.6.4_linux_amd64.zip -d /usr/bin \
+    unzip terraform_1.6.4_linux_amd64.zip -d /usr/bin 

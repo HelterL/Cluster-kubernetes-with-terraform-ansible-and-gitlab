@@ -52,7 +52,7 @@ time_for_running_stage_instances:
   needs: 
     - terraform_apply
   script:
-      - sleep 4m
+      - sleep 2m
 
 ansible_master:
   stage: master
