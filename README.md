@@ -1,5 +1,14 @@
 # Criação de um cluster kubernetes com gitlab terraform e ansible
 
+## O que utilizei?
+
+Docker
+Ansible
+Terraforma
+Drone CI
+AWS
+Kubernetes
+
 ## Pré-requisitos 
 
 * Conta na AWS
