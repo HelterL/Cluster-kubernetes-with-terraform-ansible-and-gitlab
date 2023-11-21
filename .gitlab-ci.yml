@@ -65,4 +65,14 @@ ansible_master:
     - chmod 600 ~/.ssh/id_rsa
     - ansible-playbook -u ubuntu -i ansible/aws_ec2.yaml  --ssh-common-args='-o StrictHostKeyChecking=no' --private-key ~/.ssh/id_rsa ansible/k8smaster.yml
 
-  
+ansible_workers:
+  stage: workers
+  needs:
+    - ansible_master
+  script:
+    - mkdir -p ~/.ssh/
+    - echo "$PRIVATE_KEY" > ~/.ssh/id_rsa
+    - unset PRIVATE_KEY
+    - chmod 600 ~/.ssh/id_rsa
+    - ansible-playbook -u ubuntu -i ansible/aws_ec2.yaml  --ssh-common-args='-o StrictHostKeyChecking=no' --private-key ~/.ssh/id_rsa ansible/k8sworkers.yml
+
