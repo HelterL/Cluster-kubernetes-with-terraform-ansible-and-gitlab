@@ -59,9 +59,10 @@ ansible_master:
   needs:
     - time_for_running_stage_instances
   script:
-    - echo "$PRIVATE_KEY" > aws-server.pem
+    - mkdir -p /root/.ssh/
+    - echo "$PRIVATE_KEY" > /root/.ssh/id_rsa
     - unset PRIVATE_KEY
-    - chmod 600 aws-server.pem
+    - chmod 600 /root/.ssh/id_rsa
     - ansible-playbook -i ansible/aws_ec2.yaml  --ssh-common-args='-o StrictHostKeyChecking=no' --private-key ~/.ssh/id_rsa ansible/k8smaster.yml
 
   
