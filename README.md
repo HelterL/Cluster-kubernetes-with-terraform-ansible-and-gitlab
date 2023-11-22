@@ -14,7 +14,7 @@
 * O Terraform cria as 3 instâncias AWS, grupo de segurança e toda a rede necessária
 * Ansible instala e configura o ambiente Kubernetes.
 * Eles trabalham juntos em um pipeline no Gitlab CI.
-* O Gitlab CI usa um contêiner Docker que criei com contendo o Terraform e Ansible instalados 
+* O Gitlab CI usa um contêiner Docker que criei contendo o Terraform e Ansible instalados 
 
 ## Pré-requisitos 
 
